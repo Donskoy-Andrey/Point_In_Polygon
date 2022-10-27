@@ -43,3 +43,9 @@ $ is_point_indside_poly poly.txt 3.5 6.7
 * https://en.cppreference.com/w/ документация по C++
 * https://cplusplus.com/reference/fstream/ifstream/ класс ifstream для чтения из файла
 * https://en.cppreference.com/w/cpp/container/vector класс для хранения массивов в памяти
+
+## Пример работы 
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/1.png?raw=true)
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/2.png?raw=true)
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/3.png?raw=true)
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/4.png?raw=true)
