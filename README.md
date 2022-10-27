@@ -1,3 +1,4 @@
+## Постановка задачи
 Задан массив пар чисел `x_i, y_i`, которые определяют вершины произвольного многоугольника (в общем случае невыпуклого, с самопересечениями). Задана произвольная точка на плоскости с координатами `x, y`.
 
 * Необходимо разработать программу, которая определит принадлежит ли указанная точка `(x,y)` внутренней области многоугольника. 
@@ -5,11 +6,10 @@
 
 ## Входные данные:
 Пара вещественных чисел `(x, y)` задаёт координаты тестируемой точки. Эти числа передаются в качестве аргументов командной строки.
-Файл `poly.txt` содержит в себе координаты вершин многоугольника. Каждая строчка содержит координаты одной вершины — два вещественных числа, разделённых пробелом:
+Файл `{name}.txt` (находится в папке **data**) содержит в себе координаты вершин многоугольника. Каждая строчка содержит координаты одной вершины — два вещественных числа, разделённых пробелом:
 ```
 x1 y1
 x2 y2
-x3 y3
 ...
 xn yn
 ```
@@ -21,31 +21,28 @@ The point (x,y) is inside the polygon
 The point (x,y) is outside of the polygon
 The point (x,y) is on the edge of the poly
 ```
+А также отрисовка всей задачи в файл `{name}.png` (находится в папке **data/images**).
 
 ## Запуск программы
+Для запуска программы необходимо с помощью **CMakeLists.txt** создать исполняемый файл в папке **build**:
+```commandline
+$ mrdir build
+$ cd build
+$ cmake ..
+$ make 
+```
+
 Параметры программы передаются в командной строке следующим образом:
 ```
-$ is_point_indside_poly <file name> <x> <y>
+$ ./main <file_path> <x> <y>
 ```
-Например
+Например,
 ```
-$ is_point_indside_poly poly.txt 3.5 6.7
+$ ./main ../data/1.txt -10.5 34
 ```
 
-## Тесты
-Необходимо разработать тесты для проверки корректности работы алгоритма вычисления принадлежности точки многоугольнику. Тесты должны покрывать несколько ситуаций:
-* корректность работы алгоритма в для выпуклого многоугольника
-* корректность работы алгоритма в для невыпуклого многоугольника
-* корректность работы алгоритма в для многоугольника с самопересечениями
-* корректность работы алгоритма в случае, когда исследуемая точка принадлежит границе
-
-Материалы для самостоятельного изучения
-* https://en.cppreference.com/w/ документация по C++
-* https://cplusplus.com/reference/fstream/ifstream/ класс ifstream для чтения из файла
-* https://en.cppreference.com/w/cpp/container/vector класс для хранения массивов в памяти
-
-## Пример работы 
-![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/1.png?raw=true)
-![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/2.png?raw=true)
-![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/3.png?raw=true)
-![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/4.png?raw=true)
+## Пример работы
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/1.png?raw=true#centered) 
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/2.png?raw=true#centered)
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/3.png?raw=true#centered)
+![](https://github.com/Donskoy-Andrey/Point_In_Polygon/blob/master/data/images/4.png?raw=true#centered)
