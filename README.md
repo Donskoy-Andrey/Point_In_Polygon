@@ -26,7 +26,7 @@ The point (x,y) is on the edge of the poly
 ## Запуск программы
 Для запуска программы необходимо с помощью **CMakeLists.txt** создать исполняемый файл в папке **build**:
 ```commandline
-$ mrdir build
+$ mkdir build
 $ cd build
 $ cmake ..
 $ make 
