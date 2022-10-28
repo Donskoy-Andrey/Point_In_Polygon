@@ -88,13 +88,6 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
         double x2 = data_x[i+1];
         double y1 = data_y[i];
         double y2 = data_y[i+1];
-
-        if (
-        ((abs(x - x1) < eps) and (abs(y - y1) < eps)) or
-        ((abs(x - x2) < eps) and (abs(y - y2) < eps))
-        ) {
-            return -1;
-        }
         
         double ax = x1 - x;
         double ay = y1 - y;
@@ -124,7 +117,7 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
         if (fabs(fabs(angles[angle]) - M_PI) < eps) 
             return -1;
     }
-    // std::cout << "RESULT: " << angles_sum << std::endl; 
+    std::cout << "RESULT: " << angles_sum << std::endl; 
 
     result = !(fabs(fabs(angles_sum) - 2 * M_PI) < eps);
     return result;
