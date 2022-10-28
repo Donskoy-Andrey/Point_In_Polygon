@@ -103,6 +103,10 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
         double len_a = std::sqrt(ax*ax + ay*ay);
         double len_b = std::sqrt(bx*bx + by*by);
 
+        if ((len_a < eps) or (len_b < eps)) {
+            return -1;
+        }
+
         double cos_alpha = (ax*bx + ay*by) / (len_a * len_b);
         // std::cout << "RESULT_COS: " << cos_alpha << std::endl;
 
