@@ -8,7 +8,7 @@
 #include "src/algo/in_area.cpp"
 
 void cmd(std::string filename, double x, double y, int text){
-    std::string command = "python3 ../draw_polygon.py ";
+    std::string command = "python3 ../src/pyscripts/draw_polygon.py ";
     std::string x_string = std::to_string(x);
     std::string y_string = std::to_string(y);
     std::string text_string = std::to_string(text);
