@@ -7,7 +7,11 @@
 #include "src/algo/in_area.h"
 #include "src/algo/in_area.cpp"
 
+
 void cmd(std::string filename, double x, double y, int text){
+    /*
+    Run python script to draw polygon
+    */
     std::string command = "python3 ../src/pyscripts/draw_polygon.py ";
     std::string x_string = std::to_string(x);
     std::string y_string = std::to_string(y);
@@ -42,6 +46,7 @@ int main(int argc, char **argv)
 
     int result = check_edges(data_x, data_y, x, y);    
 
+    // result of checking polygon
     std::string text;
     if (result == -1)
     {
@@ -55,6 +60,7 @@ int main(int argc, char **argv)
         std::cout << "The point (" << x << ", " << y << ") is outside the polygon." << std::endl;
     }
 
+    // draw
     cmd(filename, x, y, result);
 
     return 0;

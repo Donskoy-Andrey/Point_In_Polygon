@@ -6,6 +6,9 @@
 #include <cmath>
 
 /*
+Unused algorithm with if/else constructions.
+*/
+/*
 int check_edges(const std::vector <double> &data_x, const std::vector <double> &data_y, double x, double y){
 
     int result = 0;
@@ -77,18 +80,26 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
 
 int check_edges(const std::vector <double> &data_x, const std::vector <double> &data_y, double x, double y)
 {
+    /*
+    Algorithm to check point in the polygon.
+    */
     int result = 0;
     double eps = 1e-5;
     std::vector <double> angles;
+
+    // c{cx = 0, cy = 0, cz = 1} - perpendicular vector to our plane
     double cx = 0, cy = 0, cz = 1;
 
     for (int i = 0; i < data_x.size() - 1; ++i)
     {
+        // set 2 points
         double x1 = data_x[i];
         double x2 = data_x[i+1];
         double y1 = data_y[i];
         double y2 = data_y[i+1];
-        
+
+        // a{ax, ay, az=0} - vector to 1st point
+        // b{bx, by, bz=0} - vector to 2nd point
         double ax = x1 - x;
         double ay = y1 - y;
         double az = 0;
@@ -96,6 +107,7 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
         double by = y2 - y;
         double bz = 0;
 
+        // determinant of the mixed product matrix
         double det = ax * by * cz + ay * bz * cx + bx * cy * az -
         az * by * cx - bx * ay * cz - ax * cy * bz;
         int sign = (det >= 0) ? 1 : -1;
@@ -107,8 +119,8 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
             return -1;
         }
 
+        // calculate angel between vectors a and b
         double cos_alpha = (ax*bx + ay*by) / (len_a * len_b);
-        // std::cout << "RESULT_COS: " << cos_alpha << std::endl;
 
         double angle = std::acos(cos_alpha);
         angles.push_back(angle*sign);
@@ -121,7 +133,7 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
         if (fabs(fabs(angles[angle]) - M_PI) < eps) 
             return -1;
     }
-    std::cout << "RESULT: " << angles_sum << std::endl; 
+    // std::cout << "Sum of the angles: " << angles_sum << std::endl; 
 
     result = !(fabs(fabs(angles_sum) - 2 * M_PI) < eps);
     return result;
