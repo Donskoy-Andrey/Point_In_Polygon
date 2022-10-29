@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <string>
 #include "in_area.h"
@@ -89,6 +88,7 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
 
     // c{cx = 0, cy = 0, cz = 1} - perpendicular vector to our plane
     double cx = 0, cy = 0, cz = 1;
+    double angles_sum = 0;
 
     for (int i = 0; i < data_x.size() - 1; ++i)
     {
@@ -115,25 +115,20 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
         double len_a = std::sqrt(ax*ax + ay*ay);
         double len_b = std::sqrt(bx*bx + by*by);
 
+        // a or b is null-vector
         if ((len_a < eps) or (len_b < eps)) {
             return -1;
         }
 
         // calculate angel between vectors a and b
         double cos_alpha = (ax*bx + ay*by) / (len_a * len_b);
-
         double angle = std::acos(cos_alpha);
-        angles.push_back(angle*sign);
-    }
-    double angles_sum = 0;
-    for (int angle = 0; angle < angles.size(); ++angle)
-    {
-        // std::cout << angles[angle] << std::endl;
-        angles_sum += angles[angle];
-        if (fabs(fabs(angles[angle]) - M_PI) < eps) 
+
+        angles_sum += sign * angle;
+
+        if (fabs(fabs(angle) - M_PI) < eps) 
             return -1;
     }
-    // std::cout << "Sum of the angles: " << angles_sum << std::endl; 
 
     result = !(fabs(fabs(angles_sum) - 2 * M_PI) < eps);
     return result;
