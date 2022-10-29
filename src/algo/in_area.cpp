@@ -4,6 +4,65 @@
 #include "in_area.h"
 #include <cmath>
 
+
+int check_edges(const std::vector <double> &data_x, const std::vector <double> &data_y, double x, double y)
+{
+    /*
+    Algorithm to check point in the polygon.
+    */
+    int result = 0;
+    double eps = 1e-5;
+    std::vector <double> angles;
+
+    // c{cx = 0, cy = 0, cz = 1} - perpendicular vector to our plane
+    double cx = 0, cy = 0, cz = 1;
+    double angles_sum = 0;
+
+    for (int i = 0; i < data_x.size() - 1; ++i)
+    {
+        // set 2 points
+        double x1 = data_x[i];
+        double x2 = data_x[i+1];
+        double y1 = data_y[i];
+        double y2 = data_y[i+1];
+
+        // a{ax, ay, az=0} - vector to 1st point
+        // b{bx, by, bz=0} - vector to 2nd point
+        double ax = x1 - x;
+        double ay = y1 - y;
+        double az = 0;
+        double bx = x2 - x;
+        double by = y2 - y;
+        double bz = 0;
+
+        // determinant of the mixed product matrix
+        double det = ax * by * cz + ay * bz * cx + bx * cy * az -
+        az * by * cx - bx * ay * cz - ax * cy * bz;
+        int sign = (det >= 0) ? 1 : -1;
+
+        double len_a = std::sqrt(ax*ax + ay*ay);
+        double len_b = std::sqrt(bx*bx + by*by);
+
+        // a or b is null-vector
+        if ((len_a < eps) or (len_b < eps)) {
+            return -1;
+        }
+
+        // calculate angel between vectors a and b
+        double cos_alpha = (ax*bx + ay*by) / (len_a * len_b);
+        double angle = std::acos(cos_alpha);
+
+        angles_sum += sign * angle;
+
+        if (fabs(fabs(angle) - M_PI) < eps) 
+            return -1;
+    }
+
+    result = !(fabs(fabs(angles_sum) - 2 * M_PI) < eps);
+    return result;
+}
+
+
 /*
 Unused algorithm with if/else constructions.
 */
@@ -76,60 +135,3 @@ int check_edges(const std::vector <double> &data_x, const std::vector <double> &
     return result;
 }
 */
-
-int check_edges(const std::vector <double> &data_x, const std::vector <double> &data_y, double x, double y)
-{
-    /*
-    Algorithm to check point in the polygon.
-    */
-    int result = 0;
-    double eps = 1e-5;
-    std::vector <double> angles;
-
-    // c{cx = 0, cy = 0, cz = 1} - perpendicular vector to our plane
-    double cx = 0, cy = 0, cz = 1;
-    double angles_sum = 0;
-
-    for (int i = 0; i < data_x.size() - 1; ++i)
-    {
-        // set 2 points
-        double x1 = data_x[i];
-        double x2 = data_x[i+1];
-        double y1 = data_y[i];
-        double y2 = data_y[i+1];
-
-        // a{ax, ay, az=0} - vector to 1st point
-        // b{bx, by, bz=0} - vector to 2nd point
-        double ax = x1 - x;
-        double ay = y1 - y;
-        double az = 0;
-        double bx = x2 - x;
-        double by = y2 - y;
-        double bz = 0;
-
-        // determinant of the mixed product matrix
-        double det = ax * by * cz + ay * bz * cx + bx * cy * az -
-        az * by * cx - bx * ay * cz - ax * cy * bz;
-        int sign = (det >= 0) ? 1 : -1;
-
-        double len_a = std::sqrt(ax*ax + ay*ay);
-        double len_b = std::sqrt(bx*bx + by*by);
-
-        // a or b is null-vector
-        if ((len_a < eps) or (len_b < eps)) {
-            return -1;
-        }
-
-        // calculate angel between vectors a and b
-        double cos_alpha = (ax*bx + ay*by) / (len_a * len_b);
-        double angle = std::acos(cos_alpha);
-
-        angles_sum += sign * angle;
-
-        if (fabs(fabs(angle) - M_PI) < eps) 
-            return -1;
-    }
-
-    result = !(fabs(fabs(angles_sum) - 2 * M_PI) < eps);
-    return result;
-}
