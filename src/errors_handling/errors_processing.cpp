@@ -1,7 +1,6 @@
 #include <iostream>
 #include "parser.h"
 #include "errors_processing.h"
-#include "parser.cpp"
 
 
 int processing(int argc, char **argv, std::string &filename, double &x, double &y){

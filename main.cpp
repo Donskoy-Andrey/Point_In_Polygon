@@ -2,10 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "src/errors_handling/errors_processing.h"
-#include "src/errors_handling/errors_processing.cpp"
-#include "src/algo/in_area.h"
-#include "src/algo/in_area.cpp"
+#include "errors_processing.h"
+#include "in_area.h"
 
 
 void cmd(std::string filename, double x, double y, int text){
